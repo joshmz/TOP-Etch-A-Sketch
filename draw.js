@@ -1,4 +1,3 @@
-// 
 let squares = []
 let rows = []
 const grid = document.querySelector("#grid") // Drawing grid
@@ -30,14 +29,27 @@ function makeNewContainer() {
 function makeGrid(size){
     makeNewContainer()
     currentRow = 0
-    for (let i = 0; i < size; i++){
-        for (let i = 0; i < size; i++){
-            makeSquare(currentRow)
-        }
-        currentRow++
-        makeNewContainer()
-    }
 
+    if (squares.length == 0) {
+        for (let i = 0; i < size; i++){
+            for (let i = 0; i < size; i++){
+                makeSquare(currentRow)
+            }
+            currentRow++
+            makeNewContainer()
+        }
+    }
+    else{
+        gridSize = (Math.sqrt(squares.length))
+        growSize = size-gridSize
+        for (let i = 0; i < growSize; i++){
+            for (let i = 0; i < growSize; i++){
+                makeSquare(currentRow)
+            }
+            currentRow++
+            makeNewContainer()
+        }
+    }
 }
 
 // Wipes grid to prepare for new grid
@@ -47,10 +59,9 @@ function deleteGrid() {
     rows = []
 }
 
-
 // Deletes old grid and creates new grid
 button.addEventListener("click", () => {
-    deleteGrid()
+    // deleteGrid()
     size = Number(sizeInput.value)
     if (size <= 100) {
         makeGrid(size)
